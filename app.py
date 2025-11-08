@@ -25,7 +25,7 @@ st.title("📊 Descarga de Estados Financieros de la SEC")
 st.markdown("""
 Descarga y analiza estados financieros consolidados utilizando **XBRL Stitching**.
 
-El stitching combina múltiples reportes 10-K en estados históricamente comparables.
+El stitching combina múltiples reportes anuales o trimestrales en estados históricamente comparables.
 """)
 
 st.markdown("---")
