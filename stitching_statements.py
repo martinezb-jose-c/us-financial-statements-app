@@ -23,21 +23,23 @@ def company_xbrls_filings(ticker, format, periods=10):
         filings = company.get_filings(form=format).head(periods)
         xbrls = XBRLS.from_filings(filings)
 
-        income_statement = xbrls.statements.income_statement(max_periods=periods)
-        balance_sheet = xbrls.statements.balance_sheet(max_periods=periods)
-        cash_flow_statement = xbrls.statements.cashflow_statement(max_periods=periods)
+        income_statement = xbrls.statements.income_statement(max_periods=periods).to_dataframe()
+        balance_sheet = xbrls.statements.balance_sheet(max_periods=periods).to_dataframe()
+        cash_flow_statement = xbrls.statements.cashflow_statement(max_periods=periods).to_dataframe()
 
-        return income_statement, balance_sheet, cash_flow_statement
+        is_statement = income_statement.drop(columns=['concept'])
+        bs_statement = balance_sheet.drop(columns=['concept'])
+        cs_statement = cash_flow_statement.drop(columns=['concept'])
+
+        return is_statement, bs_statement, cs_statement
 
     except Exception as e:
         raise Exception(f"Error al obtener filings de {ticker}: {str(e)}")
 
 
-def company_statements_to_df(ticker, format="10-K", periods=10, normalize=True):
+def normalize_df_statements(ticker, format="10-K", periods=10, normalize=True):
     """
-    Convierte estados financieros XBRL a DataFrames de pandas.
-    Las filas se mantienen en su orden natural de aparición en los documentos,
-    sin ordenamiento alfabético.
+
 
     Opcionalmente, normaliza los nombres de conceptos contables para consolidar
     variantes (ej: "Contract Revenues" + "Contract revenues" → una sola fila)
@@ -56,13 +58,8 @@ def company_statements_to_df(ticker, format="10-K", periods=10, normalize=True):
         # Obtener statements con stitching
         is_stmt, bs_stmt, cf_stmt = company_xbrls_filings(ticker, format, periods)
 
-        # Convertir a DataFrames
-        is_df = is_stmt.to_dataframe()
-        bs_df = bs_stmt.to_dataframe()
-        cf_df = cf_stmt.to_dataframe()
-
         # Limpiar y formatear (SIN sort_index para mantener orden original)
-        for df in [is_df, bs_df, cf_df]:
+        for df in [is_stmt, bs_stmt, cf_stmt]:
             if 'concept' in df.columns:
                 df.drop(columns=['concept'], inplace=True)
             if 'label' in df.columns:
@@ -72,12 +69,11 @@ def company_statements_to_df(ticker, format="10-K", periods=10, normalize=True):
 
         # NORMALIZACIÓN de conceptos contables
         if normalize:
-            is_df = normalize_dataframe(is_df)
-            bs_df = normalize_dataframe(bs_df)
-            cf_df = normalize_dataframe(cf_df)
+            is_df = normalize_dataframe(is_stmt)
+            bs_df = normalize_dataframe(bs_stmt)
+            cf_df = normalize_dataframe(cf_stmt)
 
-        return bs_df, is_df, cf_df
+        return is_df, bs_df, cf_df
 
     except Exception as e:
         raise Exception(f"Error al convertir statements: {str(e)}")
-

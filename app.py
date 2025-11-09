@@ -1,7 +1,6 @@
 import streamlit as st
-import pandas as pd
 from edgar import set_identity
-from stitching_statements import company_statements_to_df
+from stitching_statements import normalize_df_statements
 
 # Configuración de la página
 st.set_page_config(
@@ -61,13 +60,6 @@ with st.sidebar:
             help="Cantidad de reportes 10-K a descargar"
     )
 
-    normalize_concepts = st.checkbox(
-            "🔄 Normalizar",
-            value=True,
-            help="Consolida variantes de nombres"
-    )
-
-
 # ✅ CONTENIDO PRINCIPAL - TAB 1
 st.subheader(f"Estados Financieros Consolidados: {ticker}")
 
@@ -81,12 +73,11 @@ st.markdown("---")
 
 # ✅ DETECTAR CAMBIOS
 if (st.session_state.last_ticker != ticker or
-    st.session_state.last_periods != num_periods or
-    st.session_state.last_normalize != normalize_concepts):
+    st.session_state.last_periods != num_periods):
     st.session_state.processed_data = None
     st.session_state.last_ticker = ticker
     st.session_state.last_periods = num_periods
-    st.session_state.last_normalize = normalize_concepts
+
 
 # ✅ PROCESAR
 if process_button:
@@ -100,11 +91,10 @@ if process_button:
                 set_identity(email_sec)
             
             with st.spinner(f"📥 Descargando {ticker}..."):
-                bs_df, is_df, cf_df = company_statements_to_df(
+                bs_df, is_df, cf_df = normalize_df_statements(
                     ticker,
                     format=format,
-                    periods=num_periods,
-                    normalize=normalize_concepts
+                    periods=num_periods
                 )
             
             st.session_state.processed_data = {
