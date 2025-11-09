@@ -91,15 +91,15 @@ if process_button:
                 set_identity(email_sec)
             
             with st.spinner(f"📥 Descargando {ticker}..."):
-                bs_df, is_df, cf_df = normalize_df_statements(
+                is_df, bs_df, cf_df = normalize_df_statements(
                     ticker,
                     format=format,
                     periods=num_periods
                 )
             
             st.session_state.processed_data = {
-                "bs_df": bs_df,
                 "is_df": is_df,
+                "bs_df": bs_df,
                 "cf_df": cf_df
             }
             
@@ -112,8 +112,8 @@ if process_button:
 
 # ✅ MOSTRAR DATOS
 if st.session_state.processed_data is not None:
-    bs_df = st.session_state.processed_data["bs_df"]
     is_df = st.session_state.processed_data["is_df"]
+    bs_df = st.session_state.processed_data["bs_df"]
     cf_df = st.session_state.processed_data["cf_df"]
     
     # Métricas
@@ -122,9 +122,9 @@ if st.session_state.processed_data is not None:
     with col_info1:
         st.metric("Períodos", len(bs_df.columns))
     with col_info2:
-        st.metric("Conceptos (BS)", len(bs_df))
-    with col_info3:
         st.metric("Conceptos (IS)", len(is_df))
+    with col_info3:
+        st.metric("Conceptos (BS)", len(bs_df))
     with col_info4:
         st.metric("Conceptos (CF)", len(cf_df))
     
