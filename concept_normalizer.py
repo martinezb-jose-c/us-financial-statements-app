@@ -51,8 +51,12 @@ CONCEPT_ALIASES = {
     "research and development": ["r&d", "research & development"],
     "selling general and administrative": ["sg&a", "selling, general and administrative"],
     "operating income": ["operating profit", "operating earnings"],
-    "interest expense": ["interest paid"],
+    "interest expense": ["interest paid", "interest expense (non-operating)"],
     "income tax expense": ["provision for income taxes", "tax provision"],
+    "other income (expense) net": ["other income net", "other (expense) income net"],
+    "income (loss) from discontinued operation net of tax": ["loss from discontinued operation net of tax"],
+    "(loss) income from equity investment": ["income from equity investment"],
+    "asset impairment charge": ["impairment", "impairment of long-lived asset"],
 
     # Balance Sheet
     "total assets": [],
