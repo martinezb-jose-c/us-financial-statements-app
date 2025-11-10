@@ -63,6 +63,7 @@ CONCEPT_ALIASES = {
     "total liabilities": [],
     "total current liabilities": ["current liabilities"],
     "account receivable": ["receivable net"],
+    "redeemable non-controlling interest": ["redeemable noncontrolling interest"],
 
     # Cash Flow
     "operating cash flow": ["cash flow from operations", "cash flows from operating activities"],
