@@ -17,7 +17,8 @@ CONCEPT_ALIASES = {
         "properties and plant and equipment",
         "pp&e",
         "ppe",
-        "property, plant & equipment"
+        "property, plant & equipment",
+        "property and equipment and intangible asset"
     ],
 
     # Current Assets
@@ -56,8 +57,7 @@ CONCEPT_ALIASES = {
     "operating cash flow": ["cash flow from operations", "cash flows from operating activities"],
     "investing cash flow": ["cash flow from investing", "cash flows from investing activities"],
     "financing cash flow": ["cash flow from financing", "cash flows from financing activities"],
-    "asset impairment": ["impairment of asset"],
-    "payment for property plant and equipment": ["payment for property and equipment and intangible asset"]
+    "asset impairment": ["impairment of asset"]
 }
 
 
