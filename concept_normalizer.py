@@ -69,7 +69,9 @@ CONCEPT_ALIASES = {
     "operating cash flow": ["cash flow from operations", "cash flows from operating activities"],
     "investing cash flow": ["cash flow from investing", "cash flows from investing activities"],
     "financing cash flow": ["cash flow from financing", "cash flows from financing activities"],
-    "asset impairment": ["impairment of asset"]
+    "asset impairment": ["impairment of asset"],
+    "equity (loss) income": ["equity income", "(loss) equity income"],
+    "deferred income tax provision (benefit)": [ "deferred income tax (benefit) provision", "deferred income taxe"]
 }
 
 
