@@ -50,12 +50,14 @@ CONCEPT_ALIASES = {
     "total assets": [],
     "total liabilities": [],
     "total current liabilities": ["current liabilities"],
+    "account receivable": ["receivable net"],
 
     # Cash Flow
     "operating cash flow": ["cash flow from operations", "cash flows from operating activities"],
     "investing cash flow": ["cash flow from investing", "cash flows from investing activities"],
     "financing cash flow": ["cash flow from financing", "cash flows from financing activities"],
-    "asset impairment": ["impairment of asset"]
+    "asset impairment": ["impairment of asset"],
+    "payment for property plant and equipment": ["payment for property and equipment and intangible asset"]
 }
 
 
