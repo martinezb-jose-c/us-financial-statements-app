@@ -18,8 +18,15 @@ CONCEPT_ALIASES = {
         "pp&e",
         "ppe",
         "property, plant & equipment",
-        "property and equipment and intangible asset"
+        "property and equipment and intangible asset",
+        "property and equipment and intangible assets"
     ],
+    # Other just in case
+    "payment for property plant and equipment": [
+    "payment for property and equipment and intangible asset",
+    "payment for property and equipment and intangible assets"  # versión plural
+    ],
+
 
     # Current Assets
     "current assets": ["total current assets"],
